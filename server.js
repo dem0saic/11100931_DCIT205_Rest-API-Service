@@ -78,3 +78,26 @@ app.post('/patients', (req, res) => {
       res.status(500).json({ error: 'Failed to register patient' });
     });
 });
+
+// Get details of a specific patient
+app.get('/patients/:patientId', (req, res) => {
+  const { patientId } = req.params;
+
+  Patient.findOne({ patientId })
+    .then((patient) => {
+      if (patient) {
+        res.status(200).json(patient);
+      } else {
+        res.status(404).json({ message: 'Patient not found' });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'Failed to get patient details' });
+    });
+});
+
+// Start the server
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
