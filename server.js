@@ -18,14 +18,54 @@ mongoose.connect('mongodb://localhost/medical_records', {
 
   // Define the Patient schema start
 const patientSchema = new mongoose.Schema({
-    patientId: { type: String, required: true },
-    surname: { type: String, required: true },
-    otherNames: { type: String, required: true },
-    gender: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
-    address: { type: String, required: true },
-    emergencyName: { type: String, required: true },
-    emergencyContact: { type: String, required: true },
-    relationship: { type: String, required: true },
+    patientId: { type: String, 
+    required: true },
+    surname: { type: String, 
+    required: true },
+    otherNames: { type: String, 
+    required: true },
+    gender: { type: String, 
+    required: true },
+    phoneNumber: { type: String, 
+    required: true },
+    address: { type: String, 
+    required: true },
+    emergencyName: { type: String, 
+    required: true },
+    emergencyContact: { type: String, 
+    required: true },
+    relationship: { type: String, 
+    required: true },
   });
    // Define the Patient schema ends
+
+   // Create the Patient model
+const Patient = mongoose.model('Patient', patientSchema);
+
+// API routes
+
+// Register a new patient
+app.post('/patients', (req, res) => {
+    const {
+      patientId,
+      surname,
+      otherNames,
+      gender,
+      phoneNumber,
+      address,
+      emergencyName,
+      emergencyContact,
+      relationship,
+    } = req.body;
+  
+    const newPatient = new Patient({
+      patientId,
+      surname,
+      otherNames,
+      gender,
+      phoneNumber,
+      address,
+      emergencyName,
+      emergencyContact,
+      relationship,
+   });
