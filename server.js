@@ -69,3 +69,12 @@ app.post('/patients', (req, res) => {
       emergencyContact,
       relationship,
    });
+
+   newPatient.save()
+    .then(() => {
+      res.status(201).json({ message: 'Patient registered successfully' });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'Failed to register patient' });
+    });
+});
